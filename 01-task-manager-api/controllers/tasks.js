@@ -19,7 +19,7 @@ const createNewTask = async (req, res) => {
   }
 };
 
-getSingleTask = async (req, res) => {
+const getSingleTask = async (req, res) => {
   try {
     const task = await Task.findOne({ _id: req.params.id });
 
@@ -35,7 +35,7 @@ getSingleTask = async (req, res) => {
   }
 };
 
-updateTask = async (req, res) => {
+const updateTask = async (req, res) => {
   try {
     updatedTask = await Task.findOneAndUpdate(
       { _id: req.params.id },
@@ -54,7 +54,7 @@ updateTask = async (req, res) => {
   }
 };
 
-deleteTask = async (req, res) => {
+const deleteTask = async (req, res) => {
   try {
     deletedTask = await Task.findOneAndDelete({ _id: req.params.id });
 
