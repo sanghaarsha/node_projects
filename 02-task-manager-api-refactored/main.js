@@ -5,7 +5,7 @@ const express = require("express");
 app = express();
 // importing routes
 const tasks = require("./routes/tasks");
-const routeDoesNotExist = require("./routes/notFound");
+const routeDoesNotExist = require("./middleware/notFound");
 
 // requests
 // app.get('/api/v1/tasks') -> get all tasks
