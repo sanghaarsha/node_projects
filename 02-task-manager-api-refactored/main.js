@@ -5,6 +5,7 @@ const express = require("express");
 app = express();
 // importing routes
 const tasks = require("./routes/tasks");
+const routeDoesNotExist = require("./routes/notFound");
 
 // requests
 // app.get('/api/v1/tasks') -> get all tasks
@@ -22,6 +23,9 @@ app.use(express.json()); // for accessing req.body
 
 // api routes
 app.use("/api/v1/tasks", tasks);
+
+// non-existent routes
+app.use("*", routeDoesNotExist);
 
 // start server iff database connection is successful
 const start = async () => {
