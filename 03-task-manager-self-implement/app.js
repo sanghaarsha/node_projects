@@ -30,3 +30,5 @@ const start = async () => {
 };
 
 start();
+
+// TODO : Implement custom error handler
