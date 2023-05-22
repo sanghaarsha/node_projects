@@ -13,25 +13,19 @@ const start = async (uri) => {
     startDeleting();
     startPopulating();
     console.log("success!!");
+    process.exit(0);
   } catch (error) {
     console.log(error);
+    process.exit(1);
   }
 };
 
-startDeleting = async () => {
-  try {
-    await Product.deleteMany();
-  } catch (error) {
-    console.log(error);
-  }
-};
+function startDeleting() {
+  Product.deleteMany();
+}
 
-startPopulating = async () => {
-  try {
-    await Product.create(products);
-  } catch (error) {
-    console.log(error);
-  }
-};
+function startPopulating() {
+  Product.create(products);
+}
 
 start(MONGO_URI);
