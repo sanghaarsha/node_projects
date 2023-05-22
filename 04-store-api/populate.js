@@ -10,8 +10,8 @@ const products = require("./products.json");
 const start = async (uri) => {
   try {
     await connectDB(uri);
-    startDeleting();
-    startPopulating();
+    await Product.deleteMany();
+    await Product.create(products);
     console.log("success!!");
     process.exit(0);
   } catch (error) {
@@ -19,13 +19,5 @@ const start = async (uri) => {
     process.exit(1);
   }
 };
-
-function startDeleting() {
-  Product.deleteMany();
-}
-
-function startPopulating() {
-  Product.create(products);
-}
 
 start(MONGO_URI);
