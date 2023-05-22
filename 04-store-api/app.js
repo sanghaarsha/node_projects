@@ -1,6 +1,7 @@
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
+require("express-async-errors"); // works just like our async wrapper
 
 const express = require("express");
 const app = express();
@@ -9,6 +10,8 @@ const connectDB = require("./db/connect");
 const notFoundMiddleware = require("./middleware/notFound");
 const errorHandlerMiddleware = require("./middleware/errorHandler");
 
+const productsRouter = require("./routes/products");
+
 // middlewares
 app.use(express.json()); //for body parsing
 
@@ -16,6 +19,9 @@ app.use(express.json()); //for body parsing
 app.get("/", (req, res) => {
   res.json({ status: "ok" });
 });
+
+// product routes
+app.use("/api/v1/products", productsRouter);
 
 // other middlewares
 app.use("*", notFoundMiddleware); //404
