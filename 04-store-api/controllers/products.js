@@ -2,11 +2,9 @@ const Product = require("../model/products");
 
 const getAllProductsStatic = async (req, res) => {
   // throw new Error("Testing node-async error package!");
-  const products = await Product.find({})
+  const products = await Product.find({ price: { $gt: 30 } })
     .sort("name")
-    .select("name price")
-    .limit(10)
-    .skip(10);
+    .select("name price");
   res.json({ numberOfHits: products.length, products });
 };
 
@@ -20,7 +18,7 @@ const getAllProducts = async (req, res) => {
   // const products = await Product.find({ company, featured });
 
   // using query object, more customized
-  const { featured, company, name, sort, select } = req.query;
+  const { featured, company, name, sort, select, numericFilters } = req.query;
   const queryObject = {};
 
   if (featured) {
@@ -31,6 +29,32 @@ const getAllProducts = async (req, res) => {
   }
   if (name) {
     queryObject.name = { $regex: name, $options: "i" };
+  }
+
+  // numeric filters
+  if (numericFilters) {
+    const operatorMap = {
+      ">": "$gt",
+      ">=": "$gte",
+      "=": "$eq",
+      "<": "$lt",
+      "<=": "$lte",
+    };
+
+    const regEx = /\b(<|>|=|>=|=)\b/g;
+
+    let filters = numericFilters.replace(regEx, (match) => {
+      return `-${operatorMap[match]}-`;
+    });
+
+    const options = ["price", "rating"];
+
+    filters = filters.split(",").forEach((item) => {
+      const [field, operator, value] = item.split("-");
+      if (options.includes(field)) {
+        queryObject[field] = { [operator]: Number([value]) };
+      }
+    });
   }
 
   // to chain sort, we should save await for later..
@@ -65,7 +89,6 @@ const getAllProducts = async (req, res) => {
   result = result.skip(skip).limit(limit);
 
   const products = await result;
-
   res.json({ products, numberOfHits: products.length });
 };
 
