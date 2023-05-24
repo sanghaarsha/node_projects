@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const { getHandler } = require("../controller/controller.js");
+const { login, dashboard } = require("../controller/controller.js");
 
-router.route("/").get(getHandler);
+router.route("/dashboard").get(dashboard);
+router.route("/login").post(login);
 
 module.exports = router;
