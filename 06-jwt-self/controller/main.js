@@ -1,10 +1,10 @@
-const CustomAPIError = require("../errors/custom-error");
+const { BadRequestError } = require("../errors/");
 const jwt = require("jsonwebtoken");
 
 const loginHandler = async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new CustomAPIError("both username and password required!", 401);
+    throw new BadRequestError("both username and password required!");
   }
 
   const id = new Date().getDate();
