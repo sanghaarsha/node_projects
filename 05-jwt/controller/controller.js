@@ -1,4 +1,4 @@
-const CustomAPIError = require("../errors/custom-error");
+const { BadRequestError } = require("../errors/");
 // check username, password in post request
 // if exists create new JWT
 // send it to front-end
@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new CustomAPIError("provide both username and password!", 401);
+    throw new BadRequestError("both email and password required");
   }
 
   // demo id, normally provided buy database
