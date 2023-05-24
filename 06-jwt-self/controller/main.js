@@ -1,9 +1,27 @@
-const loginHandler = () => {
-  console.log("login route");
+const CustomAPIError = require("../errors/custom-error");
+const jwt = require("jsonwebtoken");
+
+const loginHandler = async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new CustomAPIError("both username and password required!", 401);
+  }
+
+  const id = new Date().getDate();
+  const token = jwt.sign({ id, username }, process.env.JWT_SECRET, {
+    expiresIn: "10d",
+  });
+
+  res.status(200).json({ msg: "success", token });
 };
 
-const dashboardHandler = () => {
-  console.log("dashboard route");
+const dashboardHandler = async (req, res) => {
+  const luckyNumber = Math.floor(Math.random() * 100);
+
+  res.status(200).json({
+    msg: `Hello, ${req.user.username}!`,
+    secret: `Authorized data: Your lucky number is ${luckyNumber}.`,
+  });
 };
 
 module.exports = {
