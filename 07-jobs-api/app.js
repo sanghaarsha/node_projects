@@ -16,11 +16,7 @@ const notFound = require("./middlewares/not-found");
 app.use(express.json());
 
 // routes
-app.get("/", (req, res) => {
-  res.json({
-    msg: "ok",
-  });
-});
+app.use(express.static("./public"));
 app.use("/api/v1", mainRouter);
 
 // ! always use these middlewares after routes
