@@ -7,7 +7,8 @@ require("express-async-errors");
 const express = require("express");
 const app = express();
 
-const mainRouter = require("./routes/main");
+const authRouter = require("./routes/auth");
+const jobsRouter = require("./routes/jobs");
 const connectDB = require("./db/connect");
 const errorHandler = require("./middlewares/error-handler");
 const notFound = require("./middlewares/not-found");
@@ -17,7 +18,8 @@ app.use(express.json());
 
 // routes
 app.use(express.static("./public"));
-app.use("/api/v1", mainRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/jobs", jobsRouter);
 
 // ! always use these middlewares after routes
 app.use(errorHandler);
