@@ -1,0 +1,549 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  contact: {}
+  version: "1.0"
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+      - Ssl3
+      - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ""
+      EndpointGroupName: ""
+      EndpointName: ""
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+      - 408
+      - 413
+      - 429
+      - 500
+      - 502
+      - 503
+      - 504
+      - 521
+      - 522
+      - 524
+    RequestMethodsToRetry:
+      - GET
+      - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+  x-server-configuration:
+    default-environment: production
+    default-server: Server 1
+    environments:
+      - name: production
+        servers:
+          - name: Server 1
+            url: http://localhost:3000/api/v1
+    parameters: []
+  x-image-uri: ""
+servers:
+  - url: http://localhost:3000/api/v1
+    variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login User
+      description: Endpoint to login users.
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/loginrequest"
+                - example:
+                    email: james@gmail.com
+                    password: qwertyuiop
+            example:
+              email: james@gmail.com
+              password: qwertyuiop
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+        - request:
+            method: POST
+            uri: /auth/login
+            headers:
+              Content-Type: application/json
+            body: >-
+              {
+
+                "email": "james@gmail.com",
+
+                "password": "qwertyuiop"
+
+              }
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            statusCode: "200"
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: false
+          x-testName: login
+  /auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: register
+      description: Endpoint to register users.
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/registerrequest"
+                - example:
+                    name: James Doe
+                    email: james@gmail.com
+                    password: qwertyuiop
+            example:
+              name: James Doe
+              email: james@gmail.com
+              password: qwertyuiop
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+        - request:
+            method: POST
+            uri: /auth/register
+            headers:
+              Content-Type: application/json
+            body: >-
+              {
+
+                "name": "James Doe",
+
+                "email": "james@gmail.com",
+
+                "password": "qwertyuiop"
+
+              }
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            statusCode: "200"
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: false
+          x-testName: register
+  /jobs:
+    get:
+      tags:
+        - Jobs
+      summary: all jobs
+      operationId: alljobs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+        - request:
+            method: GET
+            uri: /jobs
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            statusCode: "200"
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: false
+          x-testName: all jobs
+    post:
+      tags:
+        - Jobs
+      summary: create job
+      operationId: createjob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createjobrequest"
+                - example:
+                    company: Apple
+                    position: Embbedded Engineer (ARM)
+            example:
+              company: Apple
+              position: Embbedded Engineer (ARM)
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+        - request:
+            method: POST
+            uri: /jobs
+            headers:
+              Content-Type: application/json
+            body: >-
+              {
+
+                "company": "Apple",
+
+                "position": "Embbedded Engineer (ARM)"
+
+              }
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            statusCode: "200"
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: false
+          x-testName: create job
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the job id
+    get:
+      tags:
+        - Jobs
+      summary: single job
+      operationId: singlejob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+        - request:
+            method: GET
+            uri: /jobs/6470efee55ccc1b02fee62ee
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            statusCode: "200"
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: false
+          x-testName: single job
+    patch:
+      tags:
+        - Jobs
+      summary: update job
+      operationId: updatejob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updatejobrequest"
+                - example:
+                    company: Intel
+                    position: Embbedded Engineer (ARM)
+            example:
+              company: Intel
+              position: Embbedded Engineer (ARM)
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+        - request:
+            method: PATCH
+            uri: /jobs/6470efee55ccc1b02fee62ee
+            headers:
+              Content-Type: application/json
+            body: >-
+              {
+
+                "company": "Intel",
+
+                "position": "Embbedded Engineer (ARM)"
+
+              }
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            statusCode: "200"
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: false
+          x-testName: update job
+    delete:
+      tags:
+        - Jobs
+      summary: delete job
+      operationId: deletejob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+        - request:
+            method: DELETE
+            uri: /jobs/6470efee55ccc1b02fee62ee
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            statusCode: "200"
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: false
+          x-testName: delete job
+components:
+  schemas:
+    loginrequest:
+      title: loginrequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: james@gmail.com
+        password: qwertyuiop
+    registerrequest:
+      title: registerrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: James Doe
+        email: james@gmail.com
+        password: qwertyuiop
+    createjobrequest:
+      title: createjobrequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Apple
+        position: Embbedded Engineer (ARM)
+    updatejobrequest:
+      title: updatejobrequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Intel
+        position: Embbedded Engineer (ARM)
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Misc
+    description: ""
+  - name: Authentication
+    description: ""
+  - name: Jobs
+    description: ""
