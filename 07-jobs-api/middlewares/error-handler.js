@@ -14,7 +14,9 @@ const errorHandler = (err, req, res, next) => {
 
   // duplicate error code : 11000
   if (err.code && err.code == "11000") {
-    customError.msg = `this email: ${err.keyValue.email}, already in use`;
+    customError.msg = `duplicate value for: ${Object.keys(
+      err.keyValue
+    )}, choose another one!`;
     customError.statusCode = StatusCodes.BAD_REQUEST;
     return res.status(customError.statusCode).json({ msg: customError.msg });
   }
