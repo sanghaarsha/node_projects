@@ -1,6 +1,6 @@
 const getAllJobs = async (req, res) => {
   res.json({
-    msg: "get all jobs",
+    ...req.user,
   });
 };
 

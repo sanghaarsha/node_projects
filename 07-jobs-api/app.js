@@ -12,6 +12,7 @@ const jobsRouter = require("./routes/jobs");
 const connectDB = require("./db/connect");
 const errorHandler = require("./middlewares/error-handler");
 const notFound = require("./middlewares/not-found");
+const authMiddleware = require("./middlewares/auth");
 
 // middleware to parse body
 app.use(express.json());
@@ -19,7 +20,7 @@ app.use(express.json());
 // routes
 app.use(express.static("./public"));
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", jobsRouter);
+app.use("/api/v1/jobs", authMiddleware, jobsRouter);
 
 // ! always use these middlewares after routes
 app.use(errorHandler);
