@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const JobSchema = mongoose.model(
+const JobSchema = mongoose.Schema(
   {
     company: {
       type: String,
